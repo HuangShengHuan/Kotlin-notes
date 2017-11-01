@@ -1,10 +1,16 @@
 # Kotlin必知点
 
+[基本数据类型](/chapter1/ji-ben-shu-ju-lei-xing.md)
+
 ## 字符串
 ### 三引号修饰原始字符串
 
 """ 这里输入原始字符串 """" 
 三引号括起，中间能够输入原始字符串，即使是输空格也能够被识别，但不支持转义字符，能够使用字符串模板；
+
+### Char
+
+Kotlin的Char类型不支持直接表示为数字，可以通过toInt()来进行转换;
 
 
 ## 数组
@@ -39,4 +45,14 @@
          }
       }
  
-
+ ## 关键字
+ 
+ ### as ：类型转换/重命名
+ 
+ Kotlin中的as关键字不仅可以用来对类进行类型转换，还可以用来对相同类名不同包的类进行重命名；
+ 
+ 对于在同一文件中引入相同类名的类情况，在Kotlin中通过as关键字可以对其进行重命名：
+ 
+     import java.lang.AlerDialog  as SimpleDialog
+     import suport.v7.AlerDialog  as FineDialog
+ 
