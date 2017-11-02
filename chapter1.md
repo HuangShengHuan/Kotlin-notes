@@ -18,4 +18,5 @@
 
 * [类](/chapter1/lei.md)
 
+* [函数、方法](/chapter1/han-shu-3001-fang-fa.md)
 

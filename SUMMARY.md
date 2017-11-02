@@ -11,4 +11,5 @@
   * [操作符](chapter1/cao-zuo-fu.md)
   * [var、val](chapter1/varval.md)
   * [类](chapter1/lei.md)
+  * [函数、方法](chapter1/han-shu-3001-fang-fa.md)
 
