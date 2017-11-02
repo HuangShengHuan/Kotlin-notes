@@ -7,3 +7,8 @@ Kotlin中的as关键字不仅可以用来对类进行类型转换，还可以用
 
     import java.lang.AlerDialog as SimpleDialog
     import suport.v7.AlerDialog as FineDialog
+    
+
+## field
+
+成员变量默认就有get和set方法，在这两个方法中通过field关键字表示当前要访问的变量；
