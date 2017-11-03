@@ -28,3 +28,8 @@ Kotlin中的as关键字不仅可以用来对类进行类型转换，还可以用
 类可见性修饰：internal，表示module内可见；
 
 与Java存在兼容性问题，Kotlin中没有Java中的default修饰；
+
+## typealias为类型声明别名
+
+    //为函数类型：(Double) -> Double 声明别名为Discount
+    typealias Discount = (Double) -> Double
