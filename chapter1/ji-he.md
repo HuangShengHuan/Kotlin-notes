@@ -52,3 +52,18 @@ public inline operator fun <K, V> Map.Entry<K, V>.component2(): V = value
 
     val map = mapOf("a" to 1, "b" to 2, "c" to 3)
 
+## xxxMapOf、xxxListOf创建可读可写集合
+
+在Kotlin中可以使用xxxMapOf，或xxxListOf来方便创建可变的集合和Map；
+在Kotlin中访问map可以方便的使用数组下标的形式来进行访问；
+
+    val map1 = hashMapOf<String, Int>("a" to 1, "b" to 2, "c" to 3)
+    map1["a"] = 2
+
+    val mutableMapOf = mutableMapOf("a" to 1, "b" to 2, "c" to 3)
+    mutableMapOf["a"] = 2
+
+    val sortedMapOf = sortedMapOf("a" to 1, "b" to 2, "c" to 3)
+    sortedMapOf["a"] = 3
+
+    val arrayListOf = arrayListOf(1, 2, 3)
