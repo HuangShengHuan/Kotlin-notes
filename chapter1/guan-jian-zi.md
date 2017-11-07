@@ -33,3 +33,36 @@ Kotlin中的as关键字不仅可以用来对类进行类型转换，还可以用
 
     //为函数类型：(Double) -> Double 声明别名为Discount
     typealias Discount = (Double) -> Double
+    
+    
+## in
+
+迭代集合：
+
+    fun main(args: Array<String>) {
+        val items = listOf("apple", "banana", "kiwi")
+        //sampleStart
+        for (item in items) {
+            println(item)
+        }
+        //sampleEnd
+    }
+    
+迭代区间：
+
+    for (x in 1..5) {
+        print(x)
+    }
+    
+
+判断是否在集合：
+
+    fun main(args: Array<String>) {
+        val items = setOf("apple", "banana", "kiwi")
+    //sampleStart
+        when {
+            "orange" in items -> println("juicy")
+            "apple" in items -> println("apple is fine too")
+        }
+    //sampleEnd
+    }

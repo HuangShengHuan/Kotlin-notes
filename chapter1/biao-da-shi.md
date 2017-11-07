@@ -36,3 +36,33 @@
 
     val a = if(xxx) 1  else -1
 
+## when表达式
+
+when函数类似于Java的switch，但比Java的switch更加强大，when方法的参数支持多种类型，从变量到常量，再到表达式，方法都适用，并且when方法还支持返回值；
+
+## 类似switch的使用方式
+
+    when (HelloKotlin.compVar) {
+        1-> print(1)
+        2-> print(2)
+        3-> print(4)
+        4-> print(5)
+    }
+ 
+ 根据情况执行，可能出现无匹配条件的情况；
+ 
+ ## when带返回值
+ 
+ when在带有返回值时，必须是条件的情况是限定的；
+ 即，无论when的参数是何值，都必须确保有返回值，这在参数类型种类已经确定的情况下，比如枚举，或者接口注解，  使用时无需else条件；
+ 
+     val result = when (HelloKotlin.compVar) {
+        1 -> 1
+        2 -> 2
+        3 -> 3
+        4 -> 4
+        else -> 0
+    }
+
+
+
