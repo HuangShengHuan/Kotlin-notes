@@ -24,5 +24,7 @@
 
 * [表达式](/chapter1/biao-da-shi.md)
 
+* [集合](/chapter1/ji-he.md)
+
 * [** 附录 **](/chapter1/fu-lu.md)
 
