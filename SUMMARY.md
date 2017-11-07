@@ -14,4 +14,5 @@
   * [函数、方法](chapter1/han-shu-3001-fang-fa.md)
   * [lambda](chapter1/lambda.md)
   * [表达式](chapter1/biao-da-shi.md)
+  * [\* 附录](chapter1/fu-lu.md)
 

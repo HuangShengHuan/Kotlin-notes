@@ -1,6 +1,6 @@
 # 数组
 
-## range
+## 区间range
  IntRange，LongRange等表示数值区间，0..10表示闭区间[0,10]，0 until 10表示左闭右开区间[0,10)
  
  在Kotlin中，区间可以使用变量来表示：
@@ -29,3 +29,21 @@
             ++i;
          }
       }
+
+### step设置区间步长
+
+    for (x in 1..10 step 2) {
+        print(x)
+    }
+
+### 反向区间
+
+    for (x in 9 downTo 0 step 3) {
+        print(x)
+    }
+
+### until左闭右开区间
+
+    for (i in 1 until 100) { // 半开区间：不包含 100
+        …… 
+    } 
