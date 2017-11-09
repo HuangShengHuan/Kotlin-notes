@@ -12,6 +12,21 @@ functional interface 又被叫做：Single Abstract Method interfaces (SAM Inter
 
 备注：该接口还可以包含default方法，static方法及Object类的public方法。
 
-
+ 
+ ## Kotlin的lambda约定
+ 
+ 不同于Java8的lambda，Kotlin的lambda中做了一些简化的约定：
+ 
+ 1、如果函数的最后一个参数是函数类型，则可以把该参数放到括号外边：
+ 
+    window.decorView.setOnTouchListener { v, event ->
+        false
+    }
+ 
+ 2、如果最后一个参数是函数类型，并且该函数只有一个参数，则传递过来的字面函数可以省略参数，用it代替：
+ 
+    window.decorView.setOnClickListener { 
+        //view 用it代替！
+    }
  
  

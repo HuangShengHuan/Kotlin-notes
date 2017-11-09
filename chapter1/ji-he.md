@@ -67,3 +67,69 @@ public inline operator fun <K, V> Map.Entry<K, V>.component2(): V = value
     sortedMapOf["a"] = 3
 
     val arrayListOf = arrayListOf(1, 2, 3)
+    
+    
+ ## 迭代数组集合
+ 
+ 对于实现了Iterable接口的集合、数组可以使用以下方式进行遍历：
+ 
+    for((index,value) in arrays.withIndex())
+    
+注意：此处之所以能够使用(i,v)的形式，是因为IndexValue是一个data 类；
+
+或者：
+
+    for(indexValues in arrays.withIndex()){
+    	indexValues.index;
+    	indexValues.value;
+    }
+    
+### 另一种方式
+
+ 凡是实现了Iterable接口的类都可以使用forEach或者forEachIndexed进行遍历，其实就是对for循环遍历的一层包装：
+ 
+     /**
+     * Performs the given [action] on each element.
+     */
+    @kotlin.internal.HidesMembers
+    public inline fun <T> Iterable<T>.forEach(action: (T) -> Unit): Unit {
+        for (element in this) action(element)
+    }
+    
+    /**
+     * Performs the given [action] on each element, providing sequential index with the element.
+     * @param [action] function that takes the index of an element and the element itself
+     * and performs the desired action on the element.
+     */
+    public inline fun <T> Iterable<T>.forEachIndexed(action: (index: Int, T) -> Unit): Unit {
+        var index = 0
+        for (item in this) action(index++, item)
+    }
+    
+    
+    
+### 扩展方法实现迭代遍历
+
+ 实现了Iterable接口的类，可以使用for循环进行遍历；
+ 
+ 通过扩展方法，类无需实现Iterator接口，即可实现被迭代；
+ 
+    fun ViewGroup.children() = object : Iterable<View> {
+     override fun iterator() = object : Iterator<View> {
+       var index = 0
+       override fun hasNext() = index < childCount
+       override fun next() = getChildAt(index++)
+     }
+    }
+
+
+    val views = // ...
+    
+    for (view in views.children()) {
+     // TODO do something with view
+    }
+    
+    val visibleHeight = views.children()
+     .filter { it.visibility == View.VISIBLE }
+     .sumBy { it.measuredHeight }
+    

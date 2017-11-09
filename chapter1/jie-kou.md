@@ -1,5 +1,35 @@
 # 接口、抽象类
 
+## 让类拥有接口特性的方式
+
+ 让类拥有接口的特性，一般的方式是通过实现该接口，然后在类中实现对应的接口方法，这种方式适合于自定义的类；
+ 但是，有时候，类的代码我们不能修改，任何让其也具备某些原先不具备的接口特性呢？
+ 
+ 答案是通过扩展方法：
+ 
+     //通过该方式，类无需实现Iterator接口，即可实现被迭代；
+    fun ViewGroup.children() = object : Iterable<View> {
+     override fun iterator() = object : Iterator<View> {
+       var index = 0
+       override fun hasNext() = index < childCount
+       override fun next() = getChildAt(index++)
+     }
+    }
+    
+    
+    val views = // ...
+    
+    for (view in views.children()) {
+     // TODO do something with view
+    }
+    
+    val visibleHeight = views.children()
+     .filter { it.visibility == View.VISIBLE }
+     .sumBy { it.measuredHeight }
+
+ 这种方式其实是对装饰模式的运用！
+
+
 ## 基本概念
 
 1. 程序设计角度抽象类与接口的区别：抽象类是事物的半成品，接口是事物功能的一种描述；

@@ -1,5 +1,15 @@
 # 数组
 
+## 数组定义
+ 在Kotlin中，为了简化自动装箱，优化性能，提供了基本类型的数组：IntArray ，FloatArray ，LongArray等
+
+  对于其他的类类型，通过Array<T>来定义：Array<String>
+
+### 数组切片
+  Kotlin中的数组可以被切片：slice，用来获取数组中一段区间的元素：
+比如 : xxx.slice(2,5)用来获取xxx数组中第3到6个元素的新的数组
+
+
 ## 区间range
  IntRange，LongRange等表示数值区间，0..10表示闭区间[0,10]，0 until 10表示左闭右开区间[0,10)
  
@@ -47,3 +57,9 @@
     for (i in 1 until 100) { // 半开区间：不包含 100
         …… 
     } 
+
+## 定义填充指定默认值的数组
+
+    fun arrayOfMinusOnes(size: Int, value: Int = -1): IntArray {
+        return IntArray(size).apply { fill(value) }
+    }

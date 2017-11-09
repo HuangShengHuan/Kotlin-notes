@@ -9,3 +9,14 @@
 Kotlin的Char类型不支持直接表示为数字，可以通过toInt()来进行转换;
 
 
+## 字符串模板
+
+字符串模板除了能够使用普通变量还支持运算和调用其他函数,可以支持任意表达式，但是这些复杂额表达式必须使用${}：
+//sampleStart
+fun sum(a: Int, b: Int) = a + b
+//sampleEnd
+
+fun main(args: Array<String>) {
+    println("sum of 19 and 23 is ${sum(19, 23)}")
+}
+
