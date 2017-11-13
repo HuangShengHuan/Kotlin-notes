@@ -1,4 +1,4 @@
-# Kotlin必知点
+# Kotlin知识点
 
 * [基本数据类型](/chapter1/ji-ben-shu-ju-lei-xing.md)
 
@@ -14,17 +14,27 @@
 
 * [操作符](/chapter1/cao-zuo-fu.md)
 
+     [操作符重载](/chapter1/cao-zuo-fu/cao-zuo-fu-zhong-zai.md)
+
 * [var、val](/chapter1/varval.md)
 
 * [类](/chapter1/lei.md)
 
 * [函数、方法](/chapter1/han-shu-3001-fang-fa.md)
 
+     [扩展方法、函数](/chapter1/han-shu-3001-fang-fa/kuo-zhan-fang-fa-3001-han-shu.md)
+
+* [属性](/chapter1/shu-xing.md)
+
+     [扩展属性](/chapter1/shu-xing/kuo-zhan-shu-xing.md)
+
 * [lambda](/chapter1/lambda.md)
 
 * [表达式](/chapter1/biao-da-shi.md)
 
 * [集合](/chapter1/ji-he.md)
+
+* [标签@](/chapter1/biao-7b7e2829.md)
 
 * [** 附录 **](/chapter1/fu-lu.md)
 

@@ -1,4 +1,4 @@
 # Kotlin notes
 
-* [First Chapter](chapter1.md)
+* [Kotlin知识点](chapter1.md)
 
