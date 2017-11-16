@@ -75,7 +75,15 @@ public inline operator fun <K, V> Map.Entry<K, V>.component2(): V = value
  
     for((index,value) in arrays.withIndex())
     
-注意：此处之所以能够使用(i,v)的形式，是因为IndexValue是一个data 类；
+withIndex()方法返回的是IndexValue<T>的Iterable：Iterable<IndexedValue<T>ss>，此处之所以能够使用(i,v)的形式，是因为IndexValue是一个data 类，实际上是迭代IndexValue这个数据类；
+
+注意： withIndex实际上是Iterable的扩展方法：
+
+```
+public fun <T> Iterable<T>.withIndex(): Iterable<IndexedValue<T>> {
+    return IndexingIterable { iterator() }
+}
+```
 
 或者：
 
@@ -84,7 +92,7 @@ public inline operator fun <K, V> Map.Entry<K, V>.component2(): V = value
     	indexValues.value;
     }
     
-### 另一种方式
+### 另一种遍历方式
 
  凡是实现了Iterable接口的类都可以使用forEach或者forEachIndexed进行遍历，其实就是对for循环遍历的一层包装：
  
