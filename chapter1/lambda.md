@@ -4,7 +4,7 @@
  
  ## 函数式接口：Single Abstract Method interfaces (SAM Interfaces)
 
-lambda表达式对应的就是函数式接口 
+lambda表达式对应的是函数式接口 
 所以首先来了解下函数式接口：functional interface 
 functional interface 又被叫做：Single Abstract Method interfaces (SAM Interfaces)
 
@@ -30,3 +30,34 @@ functional interface 又被叫做：Single Abstract Method interfaces (SAM Inter
     }
  
  
+ 在Kotlin中，lambda与FunctionX**接口实例**、具名函数以及匿名函数相对应：
+ 
+ 比如：
+ 
+ ```
+ //具名函数
+ fun funN(a:Int):Int = a  // 对应的引用(::funN)
+ 
+ //匿名函数
+ var funM: (Int) -> Int = fun(a) = a
+ var funM2= fun(a: Int) = a
+ 
+ //FuctionX接口实例
+ var funI: (Int) -> Int = object : Function1<Int, Int> {
+    override fun invoke(p1: Int): Int {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+ }
+ var funI2 = object :(Int) ->Int{
+        override fun invoke(p1: Int): Int {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+    }
+    
+ //Lambda
+ var funL : (Int) -> Int ={a -> a}
+ var funL2 = { a: Int -> a }
+ 
+ ```
+ 
+ 注意： 此处的类型(Int) -> Int 对应 接口Function1<Int , Int>
