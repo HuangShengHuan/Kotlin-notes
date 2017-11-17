@@ -20,6 +20,7 @@
  
  **函数类型对应Kotlin中23个FunctionX接口，是这些接口的另一种表现形式，类似于操作符与操作符函数之间的对应关系，比如() -> Unit用来表示Function0<Unit>;**
 
+ **函数类型的本质是FunctionX接口的实现类实例！**
  
  函数类型可以被：具名函数，匿名函数，函数式接口，lambda表达式等形式赋值；
  
@@ -54,3 +55,23 @@ val bInterface2 :(Int)->Int= object :(Int)->Int{
 }
  
  ```
+ 
+ ### 函数类型作为返回值
+ 
+ 既然函数类型的本质是FunctionX接口，那么我们也可以用接口实例作为返回值使用，形成一种嵌套的效果：
+ 
+ ```
+ fun testClosure(x: Int): (Int) -> (Int) -> Int {
+    return fun(y: Int): (Int) -> Int {
+        return fun(z: Int): Int {
+            return x + y + z
+        }
+    }
+}
+
+//通过简化为：
+fun testClosure(x: Int) = fun(y: Int) = fun(z: Int) = x + y + z
+
+```
+
+## 函数、方法 

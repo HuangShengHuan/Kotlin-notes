@@ -6,6 +6,8 @@
  
  val ： value，表示Kotlin中的常量；
  
+ 作用：val、var用来定义Kotlin中类的属性，属性不同于Java中的类成员变量，相当于Java类成员变量加上get、set方法；在类的构造方法中，添加val、var的参数会被识别为成员属性，而不添加则识别为局部变量；
+ 
 ## val
 
 val用来定义Kotlin中的常量，但是val并不完全等价于Java中的Final，需要添加const关键字，才会完全变为常量；
