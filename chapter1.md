@@ -25,6 +25,7 @@
 
      * [扩展方法、函数](/chapter1/han-shu-3001-fang-fa/kuo-zhan-fang-fa-3001-han-shu.md)
      * [函数类型](/chapter1/han-shu-3001-fang-fa/han-shu-lei-xing.md)
+     * [高阶函数](/chapter1/han-shu-3001-fang-fa/gao-jie-han-shu.md)
 
 * [属性](/chapter1/shu-xing.md)
 
