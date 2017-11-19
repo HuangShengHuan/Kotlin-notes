@@ -74,4 +74,3 @@ fun testClosure(x: Int) = fun(y: Int) = fun(z: Int) = x + y + z
 
 ```
 
-## 函数、方法 
