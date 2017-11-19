@@ -76,3 +76,27 @@ Java中的调用方式： TestObjectKt.times("aaaa",10);
     val visibleHeight = views.children()
      .filter { it.visibility == View.VISIBLE }
      .sumBy { it.measuredHeight }
+
+
+如果想让类拥有类的某些接口特性，但又不想通过让类实现该接口的方式来实现，可以通过扩展方法，并设置接口作为扩展方法的返回值，并且可以通过object匿名类来简化。
+
+## 通过操作符扩展类的方法、属性
+
+在给类定义扩展方法时除了自定义的方法，还可扩展类的操作符方法，这样可以直接对类实例使用操作符进行操作:
+
+```
+operator fun ViewGroup.get(index: Int): View? = getChildAt(index)
+operator fun ViewGroup.minusAssign(child: View) = removeView(child)
+operator fun ViewGroup.plusAssign(child: View) = addView(child)
+operator fun ViewGroup.contains(child: View) = indexOfChild(child) != -1
+val ViewGroup.size: Int
+ get() = childCount
+
+
+val views = // ...
+val first = views[0]
+views -= first
+views += first
+if (first in views) doSomething()
+Log.d("MainActivity", "View count: ${views.size}")
+```
