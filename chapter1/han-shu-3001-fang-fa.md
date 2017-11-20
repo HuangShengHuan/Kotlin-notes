@@ -252,12 +252,6 @@ fun methodOverload(a: Int = 0, b: String = "null", c: Boolean = false) {}
 ```
 
 
-## 内联函数
-
-作用：内联的作用是把函数的所有代码在编译时，直接插入到调用的地方，这样能够减少不必要的函数调用，特别是在高阶函数中，能够优化函数结构，减少函数调用时的时间开销，提高运行效率；
-
-使用前提：一般是逻辑较为简单（没有循环、递归等）、代码1~5行、函数调用和返回开销相对较大，并且其适合成为独立的功能模块，此时可以使用内联；
-
 
 ## 闭包
 
@@ -281,9 +275,72 @@ fun methodOverload(a: Int = 0, b: String = "null", c: Boolean = false) {}
 
 #### Kotlin中的闭包
 
+只有在函数的返回类型是一个函数类型时，闭包的特征才能更好的体现出来，返回的函数类型持有了原函数的引用，当我们将返回值赋给一个变量时，该变量可以被多次调用，持有的原函数引用始终不会被释放，原函数的生命周期被延长。
 
- lambda在Java和Kotlin中的区别；
+```
+fun makeFun():()->Unit{
+    var count = 0
+    return fun(){
+        ++count
+        println(count)
+    }
+}
 
+fun main(args: Array<String>) {
+    val x = makeFun()
+    //每次调用，并不会走原函数流程，所以count不会被置0
+    //每次调用x，count都会加1，原函数的生命周期被延长
+    //类似于变量，存在了状态
+    x()
+    x()
+    x()
+    x()
+}
+```
+
+在Kotlin中 闭包不仅可以通过函数实现，通过返回接口，抽象类也可以实现闭包:
+
+```
+fun testInterface():Iterable<Long>{
+    var count=0L;
+    return  Iterable{
+        object : LongIterator() {
+            override fun nextLong(): Long {
+                count++
+                return count
+            }
+
+            override fun hasNext(): Boolean = true
+        }
+    }
+}
+
+
+```
+
+此处的返回值是一个Iterator接口，在接口中操作了函数的局部变量，形成了闭包；
+
+#### 科里化
+
+ 函数的科里化也是一种闭包：
+
+```
+  fun testClosure(x: Int) = fun(y: Int) = fun(z: Int) = x + y + z
+```
+
+该函数的执行顺序从右往左执行，等价于：
+
+```
+  fun testClosure(x: Int): (Int) -> (Int) -> Int {
+    return fun(y: Int): (Int) -> Int {
+        return fun(z: Int): Int {
+            return x + y + z
+        }
+    }
+  }
+```
+
+调用方式：testClosure(1)(2)(3)
 
 
 
