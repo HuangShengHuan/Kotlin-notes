@@ -166,6 +166,16 @@ f.invoke(1)
 var cpa = String::codePointAt
 
  ```
+ 
+ 对于函数引用，比如包级函数：print，其函数引用为：
+ 
+ ```
+ ::print
+ ```
+ 
+ 对应的函数类型为：(Any) -> Unit
+ 
+
 
 ### 方法引用
 
@@ -209,33 +219,33 @@ val kpv =String::kp
 kpv.invoke("a")
  ```
 
-### 方法引用在高阶函数中使用 
+### 方法引用的函数类型变化
 
-类的方法引用，让我们可以使用另一种形式来调用类的方法，并且这种方式可以作为函数、方法的参数被传递，在高阶函数中，通过使用类的方法引用，构造出符合对应函数签名的参数：
+类的方法引用，让我们可以使用另一种形式来调用类的方法，并且这种方式可以作为函数、方法的参数被传递，在高阶函数中，通过使用类的方法引用，构造出符合对应函数类型的参数：
 
 ```
 //可以传入任何符合函数前面的方法引用
 fun hfun2(a: (Int) -> Int) {}
 
-//String的codePointAt符合该签名，但是必须以String实例引起才能保持引用签名不变
+//String的codePointAt符合该函数类型，但是必须以String实例引起才能保持函数类型不变
 hfun2("str"::codePointAt)
 
 ```
  codePointAt是属于String类的函数，比如有String实例才能调用。
  
- 同样是String的codePointAt方法，如果不以实例引起，则会改变签名：
+ 同样是String的codePointAt方法，如果不以实例引起，则会改变函数类型：
 ```
 //定义高阶函数
 fun hfun(a: (String, Int) -> Int) {}
 
-//通过方法引用的形式构造出符合函数签名的参数
+//通过方法引用的形式构造出符合函数类型的参数
 hfun(String::codePointAt)
 
 ```
 
- String的codePointAt方法原先的签名为(Int) -> Int，使用方法引用的形式后，变为(String , Int) -> Int，其中的第一个参数为String类实例自身。
+ String的codePointAt方法原先的类型为(Int) -> Int，使用方法引用的形式后，变为(String , Int) -> Int，其中的第一个参数为String类实例自身。**（实际上，当使用以 类名::方法 形式的引用时，对应的已经不是原来的方法，而是Kotlin为我们自动生成的新方法，该方法在原来的函数类型上又多了一个本类实例的参数。）**
  
- 因为codePointAt是属于String类的函数，比如传入String实例才能调起该函数。
+ 因为codePointAt是属于String类的函数，必须传入String实例才能调起该函数。
 
 
 ## 默认参数与方法重载
@@ -356,6 +366,20 @@ fun testInterface():Iterable<Long>{
 ```
 
 调用方式：testClosure(1)(2)(3)
+
+可以通过编写Function3的扩展方法，方便转化为科里化函数：
+
+```
+fun <P1,P2,P3,R> Function3<P1,P2,P3,R>.curried()=fun(p1:P1)=fun(p2:P2)= fun(p3: P3) = this(p1, p2, p3)
+
+fun add3(x:Int,y:Int,z:Int):Int{
+    return x + y + z
+}
+
+val add = (::add3).curried()
+add(1)(2)(3)
+
+```
 
 
 
