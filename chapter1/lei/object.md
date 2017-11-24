@@ -9,13 +9,32 @@ Kotlin的匿名内部类不同于Java，因为写的时候是以实现接口的�
         }
     })
  
- 如果是函数式接口，可以通过SAM转换进行简化：
+ 如果是Java的函数式接口，可以通过SAM转换进行简化：
  
     window.decorView.setOnClickListener { 
             
     }  
      
  在Kotlin中，如果参数只有一个，可以省略，用it代理，此处用it代替View；    
+ 
+ 
+ 在Java中，匿名内部类实际上只是在声明时的简化，即我们可以直接使用new关键字声明出一个类实例进行使用，而不需要为该实例声明一个变量名；
+ 
+比如：
+   直接new OnclickListener(){},我们直接将其应用在调用处；
+
+在Kotlin中，匿名内部类使用object，其原理不同于Java，是让object临时实现或继承对应的类，作为该类子类的实例放到调用处；
+
+实际上，object即使不继承实现任何类，也可以直接作为匿名内部类使用；
+
+```
+val newObj = object {
+    var x = "a"
+    var y = "b"
+}
+ 
+Log.d(tag, "x:${newObj.x}, y:${newObj.y}")
+```
      
 ### object作为对象表达式
  
@@ -238,6 +257,16 @@ Kotlin的匿名内部类不同于Java，因为写的时候是以实现接口的�
                                  
 ## 实现与Java的静态互访
 
+1、Kotlin实现Java静态
+
 Kotlin中的伴生对象companion实际上也是一个普通类，其中定义的方法和变量如果想要被Java访问，Java比如通过Companion实例才能进行，如果想要于Java互访问，方法需要变为静态，使用@JvmStatic注解，静态变量通过@JvmField注解;
+
+2、lateinit修饰的companion变量
+
+在Java中访问companion object时，一般需要通过 ：类名.companion.xx  的形式来访问其中的变量；
+
+如果companion object中的变量通过lateinit进行修饰之后，则可以直接通过：类名.xx 的形式来访问其变量；
+
+通过lateinit修饰后，Kotlin会自动暴露存储该变量状态的域，让外边可以直接访问到；
 
 **注意：**在Kotlin中，不提倡使用静态方法，当一个变量或者函数不需要依赖一个具体的类时，应该使用包级函数和包级变量；

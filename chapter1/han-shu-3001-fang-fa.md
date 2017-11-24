@@ -376,7 +376,7 @@ fun add3(x:Int,y:Int,z:Int):Int{
     return x + y + z
 }
 
-val add = (::add3).curried()
+val add = ::add3.curried()
 add(1)(2)(3)
 
 ```

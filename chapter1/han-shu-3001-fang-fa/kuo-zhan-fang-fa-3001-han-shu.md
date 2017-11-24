@@ -103,3 +103,60 @@ views += first
 if (first in views) doSomething()
 Log.d("MainActivity", "View count: ${views.size}")
 ```
+
+## 扩展方法作为方法参数或返回值
+
+ 在高级函数中，经常会使用函数类型作为参数或者返回值，有时候会使用函数类型的扩展方法，比如：
+ 
+ 高阶函数：apply
+ 
+ ```
+ public inline fun <T> T.apply(block: T.() -> Unit): T { block(); return this }
+ ```
+ 
+ 可以认为这种函数类型与普通函数类型并没有区别，只不过我们可以在传入的函数中直接使用扩展的类的实例（this），直接使用扩展类的方法，而无需实例调用（这也正是扩展方法的特性）。
+ 
+ 
+ ```
+ class Text(val text: String) {
+    fun draw() = print(text)
+}
+
+//扩展函数作为参数
+fun Text.underline(decorated: Text.() -> Unit) {
+    print("_")
+    this.decorated()
+    print("_")
+}
+
+//
+fun Text.background(decorated: Text.() -> Unit) {
+    print("\u001B[43m")
+    this.decorated()
+    print("\u001B[0m")
+}
+
+//
+fun postDecorate(text: String, decorated: Text.() -> Unit) = Text(text).apply(decorated)
+
+//扩展函数作为返回值
+fun preDecorated(decorated: Text.() -> Unit): Text.() -> Unit {
+    return { background { underline { decorated() } } }
+}
+
+//使用：
+Text("Hello").run {
+    background {
+        underline {
+            draw()
+        }
+    }
+}
+
+
+Text("hello").apply {
+   background {  }
+   underline {  }
+}
+
+```
